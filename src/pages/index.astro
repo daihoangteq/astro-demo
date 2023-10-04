@@ -1,0 +1,30 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import List from "../components/List";
+import FooterReact from "../components/Footer";
+import Item from "../components/Item";
+
+const response = await fetch(
+  "https://api.eazymock.net/mock/42a5cd6f-404a-429e-96f6-8c720e87b2f1/list"
+);
+const data = await response.json();
+const randomUser = data.data;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <ul>
+      {
+        randomUser.map((item, index) => {
+          return <Item client:visible data={item} index={index} />;
+        })
+      }
+    </ul>
+    <FooterReact client:visible />
+  </body>
+</html>
