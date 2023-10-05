@@ -13,7 +13,7 @@ const Item: React.FC<Props> = ({ data, index, children }) => {
   const handleClick = () => {
     console.log(data);
   };
-  return <div onClick={() => handleClick()}>{children}</div>;
+  return <div className="boxImg" onClick={() => handleClick()}>{children}</div>;
 };
 
 export default Item;

@@ -12,7 +12,7 @@ const { data, index } = Astro.props;
 ---
 
 <li>
-  <BoxImg data={data} index={index}>
+  <BoxImg client:visible data={data} index={index}>
     <Image src={data.avatar} alt={data.name} width="50" height="50" />
   </BoxImg>
 </li>
