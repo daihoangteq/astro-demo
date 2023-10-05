@@ -6,17 +6,14 @@ interface Props {
     avatar: string;
   };
   index: number;
+  children: any;
 }
-const Item: React.FC<Props> = ({ data, index }) => {
+const Item: React.FC<Props> = ({ data, index, children }) => {
   console.log(index);
   const handleClick = () => {
     console.log(data);
   };
-  return (
-    <li onClick={() => handleClick()}>
-      <img src={data.avatar} alt={data.name} loading="lazy" />
-    </li>
-  );
+  return <div onClick={() => handleClick()}>{children}</div>;
 };
 
 export default Item;
