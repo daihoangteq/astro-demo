@@ -1,5 +1,4 @@
 import React from "react";
-import { Image } from 'astro:assets';
 
 interface Props {
   data: {
@@ -15,7 +14,7 @@ const Item: React.FC<Props> = ({ data, index }) => {
   };
   return (
     <li onClick={() => handleClick()}>
-      <Image src={data.avatar} alt={data.name} width={100} height={100} />
+      <img src={data.avatar} alt={data.name} loading="lazy" />
     </li>
   );
 };
