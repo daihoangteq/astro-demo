@@ -5,16 +5,14 @@ import type { CONSTANT_TYPE_VALUE, IProperty } from "./ultil";
 interface Props {
   path: number[];
   data?: {
-    index: string;
     name: string;
     value: string;
   };
   onAddProperty: (
     path: number[],
-    index: string,
     property: string,
     value: string,
-    child?:any[]
+    child?: any[]
   ) => void;
   onRemoveProperty?: (property: string) => void;
 }
@@ -24,7 +22,6 @@ const Item: React.FC<Props> = ({
   onAddProperty,
   onRemoveProperty,
 }) => {
-  console.log(path);
   const [isEdit, setIsEdit] = useState(false);
   const type = useRef<CONSTANT_TYPE_VALUE | undefined>();
   const [child, setChild] = useState<
@@ -34,15 +31,8 @@ const Item: React.FC<Props> = ({
   const name2 = useRef<HTMLInputElement | null>(null);
 
   const addProperty = () => {
-    console.log("child", child);
-    if (data && data.index && name.current && name2.current) {
-      onAddProperty(
-        path,
-        data?.index,
-        name.current?.value,
-        name2.current?.value,
-        child
-      );
+    if (name.current && name2.current) {
+      onAddProperty(path, name.current?.value, name2.current?.value, child);
     }
   };
   const addField = () => {
@@ -53,6 +43,7 @@ const Item: React.FC<Props> = ({
       value: "",
     };
     currentJson.push(newField);
+    console.log("current", currentJson);
     setChild(currentJson);
   };
   // if (data && !isEdit) {
@@ -69,17 +60,8 @@ const Item: React.FC<Props> = ({
   // }
   return (
     <div>
-      {data ? (
-        <>
-          <Input className="input" ref={name} defaultValue={data.name} />
-          <Input className="input" ref={name2} defaultValue={data.value} />
-        </>
-      ) : (
-        <>
-          <Input className="input" ref={name} />
-          <Input className="input" ref={name2} />
-        </>
-      )}
+      <Input className="input" ref={name} defaultValue={data && data.name}/>
+      <Input className="input" ref={name2} defaultValue={data && data.value}/>
       <div style={{ paddingLeft: "20px" }}>
         {child &&
           child.map((ie, idx) => {
