@@ -1,12 +1,13 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Input from "./Input";
 import Select from "./Select";
 import type { CONSTANT_TYPE_VALUE, IProperty } from "./ultil";
 interface Props {
   path: number[];
-  data?: {
+  data: {
     name: string;
     value: string;
+    child: any[];
   };
   onAddProperty: (
     path: number[],
@@ -22,63 +23,71 @@ const Item: React.FC<Props> = ({
   onAddProperty,
   onRemoveProperty,
 }) => {
-  const [isEdit, setIsEdit] = useState(false);
+  console.log("Loop", data.name, path);
   const type = useRef<CONSTANT_TYPE_VALUE | undefined>();
+  const [filed, setField] = useState<{
+    name: string;
+    value: string;
+    child: any[];
+  }>(data);
   const [child, setChild] = useState<
-    { index: string; name: string; value: string; child?: any[] }[]
-  >([]);
+    { index: string; name: string; value: string; child: any[] }[]
+  >(data?.child || []);
   const name = useRef<HTMLInputElement | null>(null);
   const name2 = useRef<HTMLInputElement | null>(null);
-
   const addProperty = () => {
     if (name.current && name2.current) {
       onAddProperty(path, name.current?.value, name2.current?.value, child);
+      setField({
+        name: name.current?.value,
+        value: name2.current?.value,
+        child: [],
+      });
     }
   };
-  const addField = () => {
+  const addChildField = () => {
     const currentJson = [...child];
     const newField = {
       index: `${currentJson.length + 1}`,
       name: "",
       value: "",
+      child: [],
     };
     currentJson.push(newField);
-    console.log("current", currentJson);
+    onAddProperty([...path, currentJson.length - 1], "", "");
     setChild(currentJson);
   };
-  // if (data && !isEdit) {
-  //     return (
-  //         <>
-  //             <div>
-  //                 {data?.name} {data?.value.type}
-  //             </div>
-  //             <button disabled={isEdit}>
-  //                 Edit
-  //             </button>
-  //         </>
-  //     );
-  // }
+  useEffect(() => {
+    console.log(filed);
+  }, [, filed]);
   return (
     <div>
-      <Input className="input" ref={name} defaultValue={data && data.name}/>
-      <Input className="input" ref={name2} defaultValue={data && data.value}/>
+      <Input className="input" ref={name} defaultValue={data && data.name} />
+      <Input className="input" ref={name2} defaultValue={data && data.value} />
+      <div style={{ display: "flex" }}>
+        <button
+          onClick={() => addChildField()}
+          disabled={!Boolean(filed && filed.name)}
+        >
+          Add Child Field
+        </button>
+        <button onClick={() => addProperty()}>Add Prototype</button>
+      </div>
       <div style={{ paddingLeft: "20px" }}>
         {child &&
           child.map((ie, idx) => {
             return (
-              <Item
-                path={[...path, idx]}
-                data={ie}
-                key={ie.value}
-                onAddProperty={onAddProperty}
-              />
+              <div>
+                <Item
+                  path={[...path, idx]}
+                  data={ie}
+                  key={ie.name + idx}
+                  onAddProperty={onAddProperty}
+                />
+              </div>
             );
           })}
       </div>
-      <div style={{ background: "pink" }}>
-        <button onClick={() => addField()}>Add Child Field</button>
-      </div>
-      <button onClick={() => addProperty()}>Add Prototype</button>
     </div>
   );
 };
