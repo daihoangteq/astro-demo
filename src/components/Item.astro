@@ -13,6 +13,6 @@ const { data, index } = Astro.props;
 
 <li>
   <BoxImg client:visible data={data} index={index}>
-    <Image src={data.avatar} alt={data.name} width="50" height="50" />
+    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`} alt={data.name} width="100" height="100" />
   </BoxImg>
 </li>

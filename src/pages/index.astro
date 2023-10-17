@@ -7,10 +7,11 @@ import Navigation from "../components/Navigation.astro";
 import FooterReact from "../components/Footer";
 
 const response = await fetch(
-  "https://api.eazymock.net/mock/42a5cd6f-404a-429e-96f6-8c720e87b2f1/list"
+  "https://pokeapi.co/api/v2/pokemon"
 );
 const data = await response.json();
-const randomUser = data.data;
+const randomUser = data.results;
+
 ---
 
 <!doctype html>
@@ -27,6 +28,7 @@ const randomUser = data.data;
       }
       <!-- <Item client:visible data={randomUser[0]} index={0} /> -->
     </ul>
+
     <FooterReact client:visible />
   </body>
 </html>

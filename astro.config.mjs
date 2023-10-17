@@ -9,6 +9,6 @@ export default defineConfig({
 	site: 'https://example.com',
 	integrations: [mdx(), sitemap(), react()],
 	image: {
-		domains: ["avatars.githubusercontent"],
+		domains: ["avatars.githubusercontent", "raw.githubusercontent.com"],
 	  }
 });
