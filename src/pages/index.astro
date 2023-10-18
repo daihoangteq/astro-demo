@@ -1,4 +1,6 @@
 ---
+// import '../styles/global.css';
+
 import Item from "../components/Item.astro";
 // import Navigation from "../components/Navigation.astro";
 import FooterReact from "../components/Footer";
@@ -14,15 +16,26 @@ const randomUser = data.results;
 
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={"Hello"} />
+    <title>Astro</title>
+  </head>
   <body>
-    <ButtonReact client:visible />
     <div>
-      {
-        randomUser.map((item, index) => {
-          return <Item data={item} index={index} />;
-        })
-      }
+      <ButtonReact client:visible />
+      <div>
+        {
+          randomUser.map((item, index) => {
+            return <Item data={item} index={index} />;
+          })
+        }
+      </div>
+      <div>
+        <FooterReact client:visible />
+      </div>
     </div>
-    <FooterReact client:visible />
   </body>
 </html>
