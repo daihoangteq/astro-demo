@@ -27,7 +27,7 @@ const List: React.FC<Props> = ({ data }) => {
         {data.map((item) => {
           return (
             <SwiperSlide key={item.title}>
-              <img src={item.image} alt={item.title} />
+              <p>{item.title}</p>
             </SwiperSlide>
           );
         })}
