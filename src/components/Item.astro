@@ -10,9 +10,9 @@ interface Props {
 }
 const { data, index } = Astro.props;
 ---
-
-<li>
+<div>
+  <p>{data.name}</p>
   <BoxImg client:visible data={data} index={index}>
-    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`} alt={data.name} width="100" height="100" />
+    <Image src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`} alt={data.name} width="200" height="200" />
   </BoxImg>
-</li>
+</div>

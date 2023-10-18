@@ -1,9 +1,6 @@
 ---
-import "../styles/global.css";
-import BaseHead from "../components/BaseHead.astro";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Item from "../components/Item.astro";
-import Navigation from "../components/Navigation.astro";
+// import Navigation from "../components/Navigation.astro";
 import FooterReact from "../components/Footer";
 import ButtonReact from "../components/Button";
 
@@ -19,13 +16,13 @@ const randomUser = data.results;
 <html lang="en">
   <body>
     <ButtonReact client:visible />
-    <ul>
+    <div>
       {
         randomUser.map((item, index) => {
           return <Item data={item} index={index} />;
         })
       }
-    </ul>
+    </div>
     <FooterReact client:visible />
   </body>
 </html>
