@@ -1,19 +1,38 @@
-import React from "react";
-import Item from "./Item";
+import React, { Children, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+// import Swiper and modules styles
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 interface Props {
   data: {
-    name: string;
-    id: string;
-    avatar: string
+    title: string;
+    image: string;
   }[];
 }
 const List: React.FC<Props> = ({ data }) => {
+  useEffect(() => {
+    console.log("Hello List");
+  }, []);
   return (
-    <ul>
-      {data.map((item, index) => {
-        return <Item key={item.id} data={item} index={index} />;
-      })}
-    </ul>
+    <>
+      {" "}
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={3}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {data.map((item) => {
+          return (
+            <SwiperSlide key={item.title}>
+              <img src={item.image} alt={item.title} />
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
+    </>
   );
 };
 

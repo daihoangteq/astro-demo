@@ -5,6 +5,8 @@ import Item from "../components/Item.astro";
 // import Navigation from "../components/Navigation.astro";
 import FooterReact from "../components/Footer";
 import ButtonReact from "../components/Button";
+import List from "../components/List";
+
 
 const response = await fetch(
   "https://pokeapi.co/api/v2/pokemon?offset=1&limit=300"
@@ -12,6 +14,11 @@ const response = await fetch(
 const data = await response.json();
 const randomUser = data.results;
 
+const responseGhibli = await fetch(
+  "https://ghibliapi.vercel.app/films"
+);
+const dataGhibli = await responseGhibli.json();
+const ghibliData = dataGhibli;
 ---
 
 <!doctype html>
@@ -32,6 +39,9 @@ const randomUser = data.results;
             return <Item data={item} index={index} />;
           })
         }
+      </div>
+      <div>
+        <List data={ghibliData} client:visible/>
       </div>
       <div>
         <FooterReact client:visible />
