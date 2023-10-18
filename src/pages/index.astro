@@ -5,9 +5,10 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import Item from "../components/Item.astro";
 import Navigation from "../components/Navigation.astro";
 import FooterReact from "../components/Footer";
+import ButtonReact from "../components/Button";
 
 const response = await fetch(
-  "https://pokeapi.co/api/v2/pokemon"
+  "https://pokeapi.co/api/v2/pokemon?offset=1&limit=300"
 );
 const data = await response.json();
 const randomUser = data.results;
@@ -16,19 +17,15 @@ const randomUser = data.results;
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-  </head>
   <body>
+    <ButtonReact client:visible />
     <ul>
       {
         randomUser.map((item, index) => {
           return <Item data={item} index={index} />;
         })
       }
-      <!-- <Item client:visible data={randomUser[0]} index={0} /> -->
     </ul>
-
     <FooterReact client:visible />
   </body>
 </html>
