@@ -5,11 +5,14 @@ import Item from "../components/Item.astro";
 // import Navigation from "../components/Navigation.astro";
 import FooterReact from "../components/Footer";
 import ButtonReact from "../components/Button";
+import ButtonAstro from "../components/Button.astro";
+
+import ButtonReactAfter from "../components/ButtonAfter";
 import List from "../components/List";
 
 
 const response = await fetch(
-  "https://pokeapi.co/api/v2/pokemon?offset=1&limit=300"
+  "https://pokeapi.co/api/v2/pokemon?offset=1&limit=5"
 );
 const data = await response.json();
 const randomUser = data.results;
@@ -32,7 +35,8 @@ const ghibliData = dataGhibli;
   </head>
   <body>
     <div>
-      <ButtonReact client:load />
+      <ButtonReact client:idle />
+      <ButtonReactAfter client:idle />
       <div>
         {
           randomUser.map((item, index) => {
@@ -41,7 +45,7 @@ const ghibliData = dataGhibli;
         }
       </div>
       <div>
-        <List data={ghibliData} client:visible/>
+        <List data={ghibliData} client:idle/>
       </div>
       <div>
         <FooterReact client:visible />

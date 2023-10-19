@@ -1,0 +1,19 @@
+---
+
+---
+<button class="button">Hello Button</button>
+<style>
+    .button {
+        background-color: red;
+    }
+</style>
+<script is:raw>
+const button = document.querySelector(".button")
+setTimeout(() => {
+    button.style.backgroundColor = "green"
+}, 1000)
+button.innerText = "Hello Button Hydrate"
+button.addEventListener("click", () => {
+    console.log("Gello");
+})
+</script>

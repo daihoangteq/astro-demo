@@ -1,28 +1,28 @@
 import React, { useEffect, useState } from "react";
 
 const Button = () => {
-  const [hydrate, setHydrate] = useState(false);
+  const [hydrated, setHydrated] = useState(false);
   //   const getApi = async () => {
   //     const res = await fetch("https://pokeapi.co/api/v2/pokemon");
   //     const repo = await res.json();
   //     console.log("Button", repo);
   //   };
   useEffect(() => {
-    setHydrate(true);
+    setHydrated(true);
     const isHydra = localStorage.getItem("hydrate");
     if (isHydra) {
       console.log("hydrate", isHydra);
     } else {
-      localStorage.setItem("hydrate", "Button");
+      localStorage.setItem("hydrate", "Button aFTER");
     }
-    console.log("Hello Button");
+    console.log("Hello Button after");
   }, []);
   const handleClick = () => {
     console.log("Clicked");
   };
   return (
     <button
-      style={{ backgroundColor: hydrate ? "green" : "red" }}
+      style={{ backgroundColor: hydrated ? "green" : "red" }}
       onClick={() => handleClick()}
     >
       Button
